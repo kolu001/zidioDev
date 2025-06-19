@@ -1,16 +1,22 @@
 import mongoose from "mongoose";
-
+import bcrypt from 'bcrypt'
 const userSchema = new mongoose.Schema({
-    username: {type: String, required: true},
-    emailId: {type: String, required: true, unique: true},
-    password: {type: String, required: true},
-    verifyOtp: {type: String, default: ''},
-    verifyOtpExpireAt: {type: Number, default: 0},
-    isAccountVerified: {type: Boolean, default: false},
-    resetOtp: {type: String, default: ''},
-    resetOtpExpireAt: {type: Number, default: 0}
-})
+  fullName: { type: String, required: true },
+  emailId: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  role: { type: String, enum: ["user", "admin"], default: "user" },
+});
 
-const userModel = mongoose.models.user || mongoose.model('user', userSchema);
+userSchema.pre('save', async function () {
+  if (this.isModified('password')) {
+    this.password = await bcrypt.hash(this.password, 10);
+  }
+});
 
-export default userModel;
+userSchema.methods.comparePassword = function (password) {
+  return bcrypt.compare(password, this.password);
+};
+
+module.exports = mongoose.model('User', userSchema);
+
+

@@ -1,13 +1,23 @@
 const jwt = require('jsonwebtoken');
-const User = require('../models/usermodel');
+const User = require('../models/userModel');
 
 // generate JWT token
 const generateToken = (id) => {
     return jwt.sign({id} , process.env.JWT_SECRET , {expiresIn: '1h'}); 
 };
 
-// login user
+// regitser user
+exports.registerUser = async (req, res) => {
+  try {
+    const user = new User(req.body);
+    await user.save();
+    res.json({ token: generateToken(user) });
+  } catch (err) {
+    res.status(400).json({ error: 'Registration failed', message: err.message });
+  }
+};
 
+// login user
 exports.loginUser = async (req, res) => {
     const {emailId , password} = req.body;
     
@@ -55,8 +65,3 @@ exports.getUserInfo = async (req ,res) =>{
     }
 };
 
-
-// register user
-exports.regitserUser = async(req , res) =>{
-
-};
