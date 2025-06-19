@@ -1,10 +1,7 @@
 const express = require('express');
 
-const{
-    loginUser,
-    getUserInfo,
-    registerUser,
-} = require('./contollers/authController.js');
+
+import { loginUser , registerUser , getUserInfo } from '../controllers/authController';
 
 const router = express.Router();
 
