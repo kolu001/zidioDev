@@ -1,7 +1,7 @@
-const express = require('express');
-const auth = require('../middleware/authMiddleware');
-const upload = require('../middleware/uploadMiddleware');
-const { uploadExcel, getHistory, downloadChart } = require('../controllers/fileController');
+import express from "express";
+import auth from '../middleware/authMiddleware';
+import upload from '../middleware/uploadMiddleware';
+import { uploadExcel, getHistory, downloadChart } from '../controllers/fileController.js';
 
 const router = express.Router();
 
