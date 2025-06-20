@@ -1,6 +1,6 @@
 // for the conversion of chart to png
 
-const puppeteer = require('puppeteer');
+import puppeteer from 'puppeteer';
 
 exports.exportChartAsImage = async (chartHtml) => {
   const browser = await puppeteer.launch();
