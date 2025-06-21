@@ -20,6 +20,6 @@ app.get('/', (req, res) => res.send("API is working properly"));
 
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/dashboard", dashboardRoutes);
-app.use("/api/v1/controllers", authController);
+app.use("/api/v1/controllers", authRoutes);
 
 app.listen(port, ()=> console.log(`server running on PORT:${port}`));
