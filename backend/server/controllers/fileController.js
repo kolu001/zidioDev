@@ -1,6 +1,6 @@
-const XLSX = require('xlsx');
-const File = require('../models/File');
-const { exportChartAsImage } = require('../utils/exportChart');
+import XLSX from 'xlsx';
+import File from '../models/File';
+import { exportChartAsImage } from '../utils/exportChart';
 
 exports.uploadExcel = async (req, res) => {
   try {

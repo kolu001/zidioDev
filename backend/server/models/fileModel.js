@@ -8,4 +8,4 @@ const fileSchema = new mongoose.Schema({
   parsedData: Array,
 });
 
-module.exports = mongoose.model("File", fileSchema);
+export default mongoose.model("File", fileSchema);
